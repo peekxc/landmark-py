@@ -25,5 +25,8 @@ include = [
 	{ path = "landmark/**/*.pyd", format = "wheel" },
 ]
 
+[project.optional-dependencies]
+test = ["scipy"]
+
 [tool.meson-python.args]
 setup = ['--default-library=static']

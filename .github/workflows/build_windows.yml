@@ -11,7 +11,7 @@ jobs:
     name: ${{ matrix.os }} - Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     env:
-      PKG_NAME: skpackage
+      PKG_NAME: landmark
       CC: clang-cl
       CXX: clang-cl
       LDFLAGS: "-Wl,-S"
@@ -77,10 +77,10 @@ jobs:
     - name: Wheel dry-run 
       run: | 
         chdir ..
-        python -c "import skpackage; print(skpackage.__version__)"
+        python -c "import landmark; print(landmark.__version__)"
     - name: Test the wheel 
       run: |
-        python -m pytest tests/ --cov=skpackage --benchmark-skip
+        python -m pytest tests/ --cov=landmark --benchmark-skip
         coverage report -m
 
 # python -m pip install --verbose dist\*.whl

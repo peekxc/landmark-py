@@ -35,14 +35,14 @@ jobs:
         python -m pip install pytest pytest-cov pytest-benchmark
     - name: Install package
       run: |
-        python -m pip install --verbose .
+        python -m pip install --verbose '.[test]'
     - name: Test with pytest
       run: |
-        python -m pytest tests/ --cov=skpackage --benchmark-skip
+        python -m pytest tests/ --cov=landmark --benchmark-skip
         coverage report -m
     - name: Uninstall the package
       run: |
-        python -m pip uninstall --verbose -y skpackage
+        python -m pip uninstall --verbose -y landmark
     - name: Build a wheel
       run: |
         python -m pip wheel . --no-deps --wheel-dir $GITHUB_WORKSPACE/dist 
@@ -51,8 +51,8 @@ jobs:
         python -m pip install $GITHUB_WORKSPACE/dist/*.whl
     - name: Wheel dry-run 
       run: | 
-        python -c "import skpackage; print(skpackage.__version__)"
+        python -c "import landmark; print(landmark.__version__)"
     - name: Test the wheel 
       run: |
-        python -m pytest tests/ --cov=skpackage --benchmark-skip
+        python -m pytest tests/ --cov=landmark --benchmark-skip
         coverage report -m
