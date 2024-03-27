@@ -2,7 +2,7 @@
 
 `landmark` is a Python package that constructs _landmarks_ $L^\ast \subset X$ from a point set $X \subset \mathbb{R}^d$ or a metric space $(X, d_X)$ that approximate the [metric k-center problem](https://en.wikipedia.org/wiki/Metric_k-center) (also known _k-center clustering_ problem): 
 
-$$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : \lvert L \rvert = k}} \ \max_{x \in X} \, d_X(x, L)$$
+$$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : \lvert L \rvert = k}} \ \max_{x \in X} d_X(x, L)$$
 
 Metric $k$-center is a classic NP-hard problem intrinsically related to many other problems, such as [geometric set cover](https://en.wikipedia.org/wiki/Geometric_set_cover_problem) and [facility location](https://en.wikipedia.org/wiki/Optimal_facility_location); its output is also related to other geometric constructions, like $\epsilon$-[nets](https://en.wikipedia.org/wiki/Delone_set).
 
@@ -21,7 +21,7 @@ Clone and use:
 
 ## Usage 
 
-Given a point cloud $X$ as a numpy matrix, the indices of the landmarks can be found with `landmarks`:
+Given a point cloud $X \in \mathbb{R}^{n \times d}$ represented as a numpy matrix with $n$ points in $d$ dimensions, the indices of the landmarks can be found with `landmarks`:
 
 ```python 
 from landmark import landmarks
