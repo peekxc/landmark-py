@@ -6,7 +6,7 @@ $$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : 
 
 Metric $k$-center is a classic NP-hard problem intrinsically related to many other problems, such as [geometric set cover](https://en.wikipedia.org/wiki/Geometric_set_cover_problem) and [facility location](https://en.wikipedia.org/wiki/Optimal_facility_location); its output is also related to other geometric constructions, like $\epsilon$-[nets](https://en.wikipedia.org/wiki/Delone_set).
 
-![Landmarks example](images/k_center.svg)
+![Landmarks example](docs/images/k_center.svg)
 
 <!-- $$ \min\limits_{\substack{L \subseteq X \, : \, \lvert L \rvert = k}} \ \max_{x \in X} \, d_X(x, L)$$ -->
 <!-- where $d_X(x, L)$ denotes the Hausdorff distance to the set of landmarks $L$.  -->
