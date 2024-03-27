@@ -43,7 +43,6 @@ incdir_numpy = run_command(py, ['-c', 'import os; os.chdir(".."); import numpy; 
 incdir_pybind11 = run_command(py, ['-c', 'import os; os.chdir(".."); import pybind11; print(pybind11.get_include())'], check : true).stdout().strip()
 
 ## Header includes
-includes += include_directories('include')
 includes += include_directories(incdir_numpy)
 includes += include_directories(incdir_pybind11)
 
