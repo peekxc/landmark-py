@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: ../
+
+website:
+  title: "my_package"
+  navbar: 
+    title: My Package
+    right:
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub      
+  search:
+    location: sidebar
+    type: textbox
+    copy-button: true
+
+quartodoc: 
+  package: my_package
+  dir: reference
+  style: pkgdown # pkgdown, single-page
+
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+    margin-left: 0em
+    code-copy: true
+    code-overflow: wrap
+
+
+
