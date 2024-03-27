@@ -1,6 +1,6 @@
 project(
-  'skpackage', 'cpp', 
-  version: run_command(['src/skpackage/__version__.py'], check: true).stdout().strip(),
+  'landmark', 'cpp', 
+  version: run_command(['src/landmark/__version__.py'], check: true).stdout().strip(),
   license: 'Apache-2.0',
   meson_version: '>= 1.2.0',
   default_options : [

@@ -1,5 +1,5 @@
 ## Extension modules
-extensions = [ '_prefixsum']
+extensions = [ '_maxmin']
 foreach ext: extensions
   py.extension_module(
     ext,
@@ -12,7 +12,10 @@ endforeach
 
 python_sources = [
   '__init__.py', 
-  '__version__.py'
+  '__version__.py', 
+  'datasets.py',
+  'predicates.py',
+  'k_center.py'
 ]
 
 ## Print install directory

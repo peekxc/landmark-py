@@ -3,8 +3,8 @@ build-backend = 'mesonpy'
 requires = ['meson-python', 'wheel', 'ninja', 'numpy', 'pybind11']
 
 [project]
-name = "skpackage"
-version = '0.0.2'
+name = "landmark"
+version = '0.0.1'
 readme = "README.md"
 classifiers = [
 	"Intended Audience :: Science/Research",
@@ -21,8 +21,8 @@ dependencies = [
 ]
 license = {file = "LICENSE"}
 include = [
-	{ path = "skpackage/**/*.so", format = "wheel" },
-	{ path = "skpackage/**/*.pyd", format = "wheel" },
+	{ path = "landmark/**/*.so", format = "wheel" },
+	{ path = "landmark/**/*.pyd", format = "wheel" },
 ]
 
 [tool.meson-python.args]
