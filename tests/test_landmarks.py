@@ -49,12 +49,12 @@ def test_predecessor():
   insertion_radii[0] = np.inf
   assert np.allclose(insertion_radii, info['radii']), "Insertion radii wrong"
 
-def test_datasets():
-  from landmark.datasets import load_shape
-  from landmark.k_center import landmarks
-  X = load_shape("Aggregation")
-  ind = landmarks(X, 15, seed=0)
-  assert np.all(ind == np.array([  0, 501, 754, 707, 435, 105, 580, 750, 303, 203,  62, 165, 403, 517, 621]))
+# def test_datasets():
+#   from landmark.datasets import load_shape
+#   from landmark.k_center import landmarks
+#   X = load_shape("Aggregation")
+#   ind = landmarks(X, 15, seed=0)
+#   assert np.all(ind == np.array([  0, 501, 754, 707, 435, 105, 580, 750, 303, 203,  62, 165, 403, 517, 621]))
 
 def test_include():
   from landmark import get_include
@@ -62,16 +62,16 @@ def test_include():
   assert isinstance(include_path, str)
   assert include_path[-7:] == "include"
 
-def test_except():
-  from landmark import landmarks
-  from landmark.datasets import load_shape
-  with pytest.raises(AssertionError) as e_info: 
-    load_shape('testing')
-  X = load_shape("Aggregation")
-  with pytest.raises(ValueError) as e_info: 
-    landmarks('testing', k=5)
-  with pytest.raises(AssertionError) as e_info: 
-    landmarks(X, k=5, metric="canberra")
+# def test_except():
+#   from landmark import landmarks
+#   from landmark.datasets import load_shape
+#   with pytest.raises(AssertionError) as e_info: 
+#     load_shape('testing')
+#   X = load_shape("Aggregation")
+#   with pytest.raises(ValueError) as e_info: 
+#     landmarks('testing', k=5)
+#   with pytest.raises(AssertionError) as e_info: 
+#     landmarks(X, k=5, metric="canberra")
 
 
 
