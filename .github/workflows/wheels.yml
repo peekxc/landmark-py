@@ -18,12 +18,12 @@ jobs:
         cibw_python: ["cp38-*", "cp39-*", "cp310-*", "cp311-*", "cp312-*"]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: true 
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         name: Install Python
         with:
           python-version: "3.9"
@@ -63,7 +63,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-cov coverage
           CIBW_TEST_COMMAND: coverage run --source={package} -m pytest {package}/tests && coverage report -m
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: wheels
           path: ./dist/*.whl
@@ -81,12 +81,12 @@ jobs:
         cibw_arch: ["x86_64", "arm64"]  # TODO: add "universal2" once a universal2 libomp is available
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: true
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         name: Install Python
         with:
           python-version: "3.9"
@@ -107,7 +107,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-cov coverage
           CIBW_TEST_COMMAND: coverage run --source={package} -m pytest {package}/tests && coverage report -m
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: wheels
           path: ./dist/*.whl
@@ -126,11 +126,11 @@ jobs:
         cibw_arch: ["x86_64"]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         name: Install Python
         with:
           python-version: "3.9"
@@ -150,7 +150,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-cov coverage
           CIBW_TEST_COMMAND: coverage run --source={package} -m pytest {package}/tests && coverage report -m
           
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: wheels
           path: ./dist/*.whl
@@ -161,11 +161,11 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true 
     
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       name: Install Python
       with:
         python-version: "3.9"
@@ -173,7 +173,7 @@ jobs:
     - name: Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         path: dist/*.tar.gz
 
