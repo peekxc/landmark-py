@@ -2,7 +2,7 @@
 import importlib.metadata
 from .k_center import landmarks  # noqa: F401
 
-__version__ = importlib.metadata.version("landmark")
+__version__ = importlib.metadata.version("scikit-landmark")
 
 
 ## Based on Numpy's usage: https://github.com/numpy/numpy/blob/v1.25.0/numpy/lib/utils.py#L75-L101

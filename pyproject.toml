@@ -3,8 +3,8 @@ build-backend = 'mesonpy'
 requires = ['meson-python', 'wheel', 'ninja', 'numpy', 'pybind11']
 
 [project]
-name = "landmark"
-version = '0.0.3'
+name = "scikit-landmark"
+version = '0.0.4'
 readme = "README.md"
 classifiers = [
 	"Intended Audience :: Science/Research",
