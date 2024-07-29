@@ -4,7 +4,7 @@ requires = ['meson-python', 'wheel', 'ninja', 'numpy', 'pybind11']
 
 [project]
 name = "scikit-landmark"
-version = '0.0.4'
+version = '0.0.5'
 readme = "README.md"
 classifiers = [
 	"Intended Audience :: Science/Research",
