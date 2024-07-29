@@ -1,0 +1,18 @@
+/* // $page-start-inset: 0px !default; 
+// $content-padding-top: 0px;  */
+
+
+.doc-index section .table tr td:first-child {
+  width: 25%;
+} 
+
+.panel-tabset a.nav-link {
+  padding-left: 0.25em !important;
+  padding-right: 0.25em !important;
+  padding-top: 0.35em !important;
+  padding-bottom: 0.35em !important;
+}
+
+/* .page_columns {
+  page-start-inset] minmax(50px, 150px) 
+} */

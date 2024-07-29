@@ -1,0 +1,142 @@
+---
+title: "Greedy permutation on shape data sets"
+format:
+  html:
+    code-fold: true
+    css: styles.css
+include-in-header: 
+- text: |
+    <style>figure { padding: 3em 0 3em 0; }</style>
+---
+
+```{python}
+#| echo: False
+import numpy as np
+from bokeh.plotting import figure, show 
+from bokeh.io import output_notebook
+from bokeh.layouts import row, column
+output_notebook(verbose=False, hide_banner=True)
+```
+
+Below, the `landmark` function is shown across varying datasets from the [clustering basic benchmark](https://cs.joensuu.fi/sipu/datasets/). 40 landmarks are selected, which are shown in red.
+
+::: {.panel-tabset}
+
+```{python}
+#| echo: false
+from landmark import landmarks
+from landmark.datasets import load_shape
+def fig_landmarks(dataset: str, k: int):
+  X = load_shape(dataset)[:,:2]
+  ind = landmarks(X, k = k)
+  ps = figure(width=350, height=350, title="Original data + Landmarks")
+  ps.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)
+  ps.scatter(*X[ind].T, color='red', size=6, line_color='white')
+  ps.toolbar_location = None 
+  ps.title.align = 'center'
+  return ps
+K = 40
+```
+
+## Aggregation{style="display: flex; justify-content: center; align-items: center;"}
+```{python}
+#| echo: true
+show(fig_landmarks("aggregation", k=40))
+```
+
+## Compound
+```{python}
+#| echo: true
+show(fig_landmarks("compound", k=40))
+```
+
+## Path-based
+```{python}
+#| echo: true
+show(fig_landmarks("pathbased", k=40))
+```
+
+## Spiral
+```{python}
+#| echo: true
+show(fig_landmarks("spiral", k=40))
+```
+
+## D31
+```{python}
+#| echo: true
+show(fig_landmarks("d31", k=40))
+```
+
+## R15
+```{python}
+#| echo: true
+show(fig_landmarks("r15", k=40))
+```
+
+## Jain
+```{python}
+#| echo: true
+show(fig_landmarks("jain", k=40))
+```
+
+## Flame
+```{python}
+#| echo: true
+show(fig_landmarks("flame", k=40))
+```
+
+:::
+
+The landmark indices returned by `landmark` represent the $k$-prefix of the *greedy permutation*. 
+
+```{python}
+#| echo: True 
+#| title: Packing and coverage guarantees
+X = load_shape("aggregation")[:,:2]
+ind, info = landmarks(X, k = K, full_output=True)
+
+## Show coverage of the union 
+p = figure(width=350, height=350, title="Coverage guarantee")
+p.circle(*X[ind].T, radius=info['radii'][-1], fill_color='yellow', fill_alpha=0.15)
+p.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)
+p.scatter(*X[ind].T, color='red', size=6, line_color='white')
+
+## Show packing of the union 
+q = figure(width=350, height=350, title="Packing guarantee")
+q.circle(*X[ind].T, radius=info['radii'][-1] / 2.0, fill_color='orange', fill_alpha=0.15)
+q.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)
+q.scatter(*X[ind].T, color='red', size=6, line_color='white')
+show(row(p, q))
+```
+
+## Generalized metrics
+
+For point cloud data, any [Minkowski distance](https://en.wikipedia.org/wiki/Minkowski_distance) is supported data out-of-the-box, either by supplying its name via the `metric` argument or by passing `metric='minkowksi'` and a suitable `p`, i.e. 
+
+```python
+landmarks(X, k=K, metric="cityblock")
+# -or-
+landmarks(X, k=K, metric="minkowksi", p=1)
+```
+
+In general, different metrics lead to distinct solutions shaped by their respective distance measures, as clusters and center placements reflect the geometric and statistical characteristics defined by the metric. For example, below are the first `K` landmarks clustered using the $1$-, $2$-, and $\infty$- $p$-norms:
+
+```{python}
+X = load_shape("compound")[:,:2]
+figs = []
+for metric in ['cityblock', 'euclidean', 'chebychev']:
+  ind = landmarks(X, k = K, metric=metric)
+  pc = figure(title=f"Landmarks with {metric} metric")
+  pc.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)
+  pc.scatter(*X[ind].T, color='red', size=6, line_color='white')
+  pc.toolbar_location = None
+  pc.sizing_mode = 'scale_width'
+  figs.append(pc)
+
+figs_row = row(figs)
+figs_row.sizing_mode = 'scale_width'
+show(figs_row)
+```
+
+With the Euclidean norm ($p = 2$), centers are placed to minimize the maximum radius (maximal dispersion) within clusters, leading to solutions that tend to have spherical shapes. When $p=1$, the centers tend to be placed at medians of coordinate ranges. When $p=\infty$, clusters can be elongated along the coordinate axes leading to centers that favor a more 'grid-like' placement.

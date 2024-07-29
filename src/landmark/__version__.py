@@ -2,7 +2,7 @@
 import os
 
 
-def _init_version():
+def _init_version(): # pragma: no cover
 	init = os.path.join(os.path.dirname(__file__), "../../pyproject.toml")
 	with open(init) as fid:
 		data = fid.readlines()
@@ -12,5 +12,5 @@ def _init_version():
 	return version
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
 	print(_init_version())

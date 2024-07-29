@@ -31,6 +31,9 @@ test = ["scipy"]
 [tool.meson-python.args]
 setup = ['--default-library=static']
 
+[tool.coverage.report]
+omit = ["__*.py"]
+
 [tool.cibuildwheel]
 before-test = "python -m pip install scipy"
 

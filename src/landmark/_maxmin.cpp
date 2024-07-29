@@ -256,7 +256,7 @@ py::tuple maxmin(
 	if (pairwise_dist){
     if (x.ndim() != 1){ throw std::invalid_argument("Distance input must be a 1-dimensional array."); }
     const double* dx = x.data(); 
-		const size_t N = x.size();
+		// const size_t N = x.size();
 		return(maxmin_dist(dx, n_pts, eps, n, seed, 0));
 	} else {
     if (x.ndim() != 2){ throw std::invalid_argument("Point cloud input must be a two dimensional array."); }

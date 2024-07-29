@@ -1,4 +1,9 @@
+"""pytest unit tests for the landmark package.
+
+Test with: coverage run --source=landmark -m pytest tests && coverage report -m
+"""
 import numpy as np 
+import pytest
 
 def test_basic():
   from landmark import landmarks
@@ -12,7 +17,6 @@ def test_basic():
 
 def test_equiv():
   from landmark import landmarks
-  from scipy.spatial import distance
   from scipy.spatial.distance import pdist, squareform
   np.random.seed(1234)
   X = np.random.uniform(size=(50,2))
@@ -44,3 +48,32 @@ def test_predecessor():
   insertion_radii = np.array([np.linalg.norm(X[lm] - X[p]) for lm, p in zip(ind, info['predecessors'])])
   insertion_radii[0] = np.inf
   assert np.allclose(insertion_radii, info['radii']), "Insertion radii wrong"
+
+def test_datasets():
+  from landmark.datasets import load_shape
+  from landmark.k_center import landmarks
+  X = load_shape("Aggregation")
+  ind = landmarks(X, 15, seed=0)
+  assert np.all(ind == np.array([  0, 501, 754, 707, 435, 105, 580, 750, 303, 203,  62, 165, 403, 517, 621]))
+
+def test_include():
+  from landmark import get_include
+  include_path = get_include()
+  assert isinstance(include_path, str)
+  assert include_path[-7:] == "include"
+
+def test_except():
+  from landmark import landmarks
+  from landmark.datasets import load_shape
+  with pytest.raises(AssertionError) as e_info: 
+    load_shape('testing')
+  X = load_shape("Aggregation")
+  with pytest.raises(ValueError) as e_info: 
+    landmarks('testing', k=5)
+  with pytest.raises(AssertionError) as e_info: 
+    landmarks(X, k=5, metric="canberra")
+
+
+
+
+

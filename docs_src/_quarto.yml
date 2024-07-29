@@ -25,6 +25,8 @@ website:
     contents:
       - text: Overview
         href: greedy_perm.qmd
+      - text: Introduction 
+        href: shapes.qmd
       - section: API Reference
         href: index.qmd
         contents: 
@@ -40,8 +42,8 @@ format:
       light: flatly
       dark: darkly
     margin-left: 0em
-    linestretch: 1.2
-    css: styles.scss
+    linestretch: 1.5
+    css: styles.css
     page-layout: article
     toc: true
     
