@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>get_include</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">API Reference</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./index.html" class="sidebar-item-text sidebar-link active">
+            <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">API Reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -158,9 +158,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#api-reference" id="toc-api-reference" class="nav-link active" data-scroll-target="#api-reference">API Reference</a>
+  <li><a href="#landmark.get_include" id="toc-landmark.get_include" class="nav-link active" data-scroll-target="#landmark.get_include">get_include</a>
   <ul class="collapse">
-  <li><a href="#landmark" id="toc-landmark" class="nav-link" data-scroll-target="#landmark">Landmark</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -171,19 +171,14 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="api-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">API Reference</h1>
-<section id="landmark" class="level2">
-<h2 class="anchored" data-anchor-id="landmark">Landmark</h2>
-<p>Landmark package for finding metric-center approximations.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="./landmarks.html#landmark.landmarks">landmarks</a></td>
-<td>Computes <em>landmark</em> indices for a point set or metric space via the furthest first traversal.</td>
-</tr>
-</tbody>
-</table>
+<section id="landmark.get_include" class="level1">
+<h1>get_include</h1>
+<p><code>get_include()</code></p>
+<p>Return the directory that contains the packages *.h header files.</p>
+<p>Extension modules that need to compile against the packages exported header files should use this function to locate the appropriate include directory.</p>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<p>When using <code>distutils</code>, for example in <code>setup.py</code>: <code>python   ...   Extension('extension_name', ..., include_dirs=[landmark.get_include()])   ...</code> Or with <code>meson-python</code>, for example in <code>meson.build</code>: <code>meson   ...   run_command(py, ['-c', 'print(landmark.get_include())', check : true).stdout().strip()   ...</code></p>
 
 
 </section>

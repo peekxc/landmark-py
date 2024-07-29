@@ -26,7 +26,7 @@
     "href": "index.html",
     "title": "API Reference",
     "section": "",
-    "text": "landmarks\nComputes landmark indices for a point set or metric space via the furthest first traversal.",
+    "text": "Landmark package for finding metric-center approximations.\n\n\n\nlandmarks\nComputes landmark indices for a point set or metric space via the furthest first traversal.",
     "crumbs": [
       "Landmark",
       "API Reference"
@@ -37,7 +37,7 @@
     "href": "index.html#landmark",
     "title": "API Reference",
     "section": "",
-    "text": "landmarks\nComputes landmark indices for a point set or metric space via the furthest first traversal.",
+    "text": "Landmark package for finding metric-center approximations.\n\n\n\nlandmarks\nComputes landmark indices for a point set or metric space via the furthest first traversal.",
     "crumbs": [
       "Landmark",
       "API Reference"
@@ -130,5 +130,41 @@
     "title": "k_center.landmarks",
     "section": "",
     "text": "The first radius is always the diameter of the point set, which can be expensive to compute for high dimensions, so by default “inf” is used as the first covering radius\nIf metric = \"euclidean\" and X is a set of coordinates, the landmarks may be computed from the point set directly. For all other metrics, you must compute all pairwise distances first and supply that as X.\nIf ‘k’ is specified an ‘eps’ is not (or it’s -1.0), then the procedure stops when ‘k’ landmarks are found. The converse is true if k = 0 and eps &gt; 0. If both are specified, the both are used as stopping criteria for the procedure (whichever becomes true first).\ndictionary containing the insertion radii whose values ‘r’ yield a cover of ‘a’ when balls of radius ‘r’ are places at the landmark points and the predecessors."
+  },
+  {
+    "objectID": "get_include.html",
+    "href": "get_include.html",
+    "title": "get_include",
+    "section": "",
+    "text": "get_include()\nReturn the directory that contains the packages *.h header files.\nExtension modules that need to compile against the packages exported header files should use this function to locate the appropriate include directory.\n\n\nWhen using distutils, for example in setup.py: python   ...   Extension('extension_name', ..., include_dirs=[landmark.get_include()])   ... Or with meson-python, for example in meson.build: meson   ...   run_command(py, ['-c', 'print(landmark.get_include())', check : true).stdout().strip()   ..."
+  },
+  {
+    "objectID": "get_include.html#notes",
+    "href": "get_include.html#notes",
+    "title": "get_include",
+    "section": "",
+    "text": "When using distutils, for example in setup.py: python   ...   Extension('extension_name', ..., include_dirs=[landmark.get_include()])   ... Or with meson-python, for example in meson.build: meson   ...   run_command(py, ['-c', 'print(landmark.get_include())', check : true).stdout().strip()   ..."
+  },
+  {
+    "objectID": "shapes.html",
+    "href": "shapes.html",
+    "title": "Greedy permutation on shape data sets",
+    "section": "",
+    "text": "Below, the landmark function is demonstrated on the “aggregation” dataset (taken from the clustering basic benchmark). 40 landmarks are selected, which are shown in red.\nThe landmark indices returned by landmark represent the \\(k\\)-prefix of the greedy permutation.\nCode\nX = load_shape(\"aggregation\")[:,:2]\nind, info = landmarks(X, k = K, full_output=True)\n\n## Show coverage of the union \np = figure(width=350, height=350, title=\"Coverage guarantee\")\np.circle(*X[ind].T, radius=info['radii'][-1], fill_color='yellow', fill_alpha=0.15)\np.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)\np.scatter(*X[ind].T, color='red', size=6, line_color='white')\n\n## Show packing of the union \nq = figure(width=350, height=350, title=\"Packing guarantee\")\nq.circle(*X[ind].T, radius=info['radii'][-1] / 2.0, fill_color='orange', fill_alpha=0.15)\nq.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)\nq.scatter(*X[ind].T, color='red', size=6, line_color='white')\nshow(row(p, q))",
+    "crumbs": [
+      "Landmark",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "shapes.html#generalized-metrics",
+    "href": "shapes.html#generalized-metrics",
+    "title": "Greedy permutation on shape data sets",
+    "section": "Generalized metrics",
+    "text": "Generalized metrics\nFor point cloud data, any Minkowski distance is supported data out-of-the-box, either by supplying its name via the metric argument or by passing metric='minkowksi' and a suitable p, i.e. \nlandmarks(X, k=K, metric=\"cityblock\")\n# -or-\nlandmarks(X, k=K, metric=\"minkowksi\", p=1)\nIn general, different metrics lead to distinct solutions shaped by their respective distance measures, as clusters and center placements reflect the geometric and statistical characteristics defined by the metric. For example, below are the first K landmarks clustered using the \\(1\\)-, \\(2\\)-, and \\(\\infty\\)- \\(p\\)-norms:\n\n\nCode\nX = load_shape(\"compound\")[:,:2]\nfigs = []\nfor metric in ['cityblock', 'euclidean', 'chebychev']:\n  ind = landmarks(X, k = K, metric=metric)\n  pc = figure(title=f\"Landmarks with {metric} metric\")\n  pc.scatter(*X.T, color='lightblue', size=3, line_color='black', line_width=0.5)\n  pc.scatter(*X[ind].T, color='red', size=6, line_color='white')\n  pc.toolbar_location = None\n  pc.sizing_mode = 'scale_width'\n  figs.append(pc)\n\nfigs_row = row(figs)\nfigs_row.sizing_mode = 'scale_width'\nshow(figs_row)\n\n\n\n  \n\n\n\n\n\nWith the Euclidean norm (\\(p = 2\\)), centers are placed to minimize the maximum radius (maximal dispersion) within clusters, leading to solutions that tend to have spherical shapes. When \\(p=1\\), the centers tend to be placed at medians of coordinate ranges. When \\(p=\\infty\\), clusters can be elongated along the coordinate axes leading to centers that favor a more ‘grid-like’ placement.",
+    "crumbs": [
+      "Landmark",
+      "Introduction"
+    ]
   }
 ]
