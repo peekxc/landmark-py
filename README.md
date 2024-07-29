@@ -4,9 +4,13 @@
 
 $$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : \lvert L \rvert = k}} \ \max_{x \in X} d_X(x, L)$$
 
-Metric $k$-center is a classic NP-hard problem intrinsically related to many other problems, such as [geometric set cover](https://en.wikipedia.org/wiki/Geometric_set_cover_problem) and [facility location](https://en.wikipedia.org/wiki/Optimal_facility_location); its output is also related to other geometric constructions, like $\epsilon$-[nets](https://en.wikipedia.org/wiki/Delone_set).
+Metric $k$-center is a classic NP-hard problem intrinsically similar to other classical problems, such as [geometric set cover](https://en.wikipedia.org/wiki/Geometric_set_cover_problem) and [facility location](https://en.wikipedia.org/wiki/Optimal_facility_location); its output is also related to other geometric constructions, like [r-nets](https://en.wikipedia.org/wiki/Delone_set) and [well-separated pair decompositions](https://en.wikipedia.org/wiki/Well-separated_pair_decomposition).
+
+Below is an example a data set $X$ (blue points), some sample landmarks $L$ (red), along with the coverage (yellow) and packing (orange) properties they obey. 
 
 ![Landmarks example](docs/images/k_center.svg)
+
+
 
 <!-- $$ \min\limits_{\substack{L \subseteq X \, : \, \lvert L \rvert = k}} \ \max_{x \in X} \, d_X(x, L)$$ -->
 <!-- where $d_X(x, L)$ denotes the Hausdorff distance to the set of landmarks $L$.  -->
@@ -21,7 +25,7 @@ Clone and use:
 
 ## Usage 
 
-Given a point cloud $X \in \mathbb{R}^{n \times d}$ represented as a numpy matrix with $n$ points in $d$ dimensions, the indices of the landmarks can be found with `landmarks`:
+Given a point cloud $X \in \mathbb{R}^{n \times d}$ represented as a numpy matrix with $n$ points in $d$ dimensions, the indices of the landmarks can be found with the `landmarks` function:
 
 ```python 
 from landmark import landmarks
@@ -30,7 +34,7 @@ print(ind)
 # [0, 32, 45, 16, ...]
 ```
 
-The first $k$-indices of `ind` are equivalent to the $k$-th prefix of the [greedy permutation](https://www.youtube.com/watch?v=xWuq1aXHLdU). You can get their covering radii by specifying `radii = True`
+The first $k$-indices of `ind` are equivalent to the $k$-th prefix of the [greedy permutation](https://www.youtube.com/watch?v=xWuq1aXHLdU). You can get their covering radii by specifying `radii = True`:
 
 ```python 
 from landmark import landmarks

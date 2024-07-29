@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>k_center.landmarks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">API Reference</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./index.html" class="sidebar-item-text sidebar-link active">
+            <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">API Reference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -152,9 +152,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#api-reference" id="toc-api-reference" class="nav-link active" data-scroll-target="#api-reference">API Reference</a>
+  <li><a href="#landmark.k_center.landmarks" id="toc-landmark.k_center.landmarks" class="nav-link active" data-scroll-target="#landmark.k_center.landmarks">k_center.landmarks</a>
   <ul class="collapse">
-  <li><a href="#landmark" id="toc-landmark" class="nav-link" data-scroll-target="#landmark">Landmark</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -165,18 +167,97 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="api-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">API Reference</h1>
-<section id="landmark" class="level2">
-<h2 class="anchored" data-anchor-id="landmark">Landmark</h2>
+<section id="landmark.k_center.landmarks" class="level1">
+<h1>k_center.landmarks</h1>
+<p><code>k_center.landmarks(X, k=15, eps=-1.0, seed=0, full_output=False, metric='euclidean')</code></p>
+<p>Computes landmarks points for a point set or set of distance using the ‘maxmin’ method.</p>
+<p>This function computes a prefix of the <em>greedy permutation</em> of <code>X</code> using the ‘maxmin’ method; if <code>k</code> is set, only the first <code>k</code> points are found, otherwise if <code>eps</code> is positive the prefix is expanded until a cover over <code>X</code> of balls with radius <code>eps</code> is found.</p>
+<section id="parameters" class="level2">
+<h2 class="anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 66%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><a href="./landmarks.html#landmark.landmarks">landmarks</a></td>
-<td>Computes <em>landmark</em> indices for a point set or metric space via the furthest first traversal.</td>
+<td><code>X</code></td>
+<td>ArrayLike</td>
+<td>(n x d) matrix of <em>n</em> points in <em>d</em> dimensions, a distance matrix, or a set of pairwise distances</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td><code>k</code></td>
+<td>Optional[int]</td>
+<td>number of landmarks requested. Defaults to 15.</td>
+<td><code>15</code></td>
+</tr>
+<tr class="odd">
+<td><code>eps</code></td>
+<td>Optional[float]</td>
+<td>covering radius to stop finding landmarks at. If negative, uses <em>k</em> instead (default).</td>
+<td><code>-1.0</code></td>
+</tr>
+<tr class="even">
+<td><code>seed</code></td>
+<td>int</td>
+<td>index of the initial point to be the first landmark. Defaults to 0.</td>
+<td><code>0</code></td>
+</tr>
+<tr class="odd">
+<td><code>full_output</code></td>
+<td>bool</td>
+<td>whether to return insertion radii and predecessors. Defaults to False.</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td><code>metric</code></td>
+<td>str</td>
+<td>metric distance to use. Ignored if <code>X</code> is a set of distances. See details.</td>
+<td><code>'euclidean'</code></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="returns" class="level2">
+<h2 class="anchored" data-anchor-id="returns">Returns</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>np.ndarray</td>
+<td>Indices of the landmark points; if <code>full_output = True</code>, also returns a dictionary containing auxiliary information.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>The first radius is always the diameter of the point set, which can be expensive to compute for high dimensions, so by default “inf” is used as the first covering radius</li>
+<li>If <code>metric = "euclidean"</code> and <code>X</code> is a set of coordinates, the landmarks may be computed from the point set directly. For all other metrics, you must compute all pairwise distances first and supply that as <code>X</code>.</li>
+<li>If ‘k’ is specified an ‘eps’ is not (or it’s -1.0), then the procedure stops when ‘k’ landmarks are found. The converse is true if k = 0 and eps &gt; 0. If both are specified, the both are used as stopping criteria for the procedure (whichever becomes true first).</li>
+<li>dictionary containing the insertion radii whose values ‘r’ yield a cover of ‘a’ when balls of radius ‘r’ are places at the landmark points and the predecessors.</li>
+</ul>
 
 
 </section>

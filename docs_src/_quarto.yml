@@ -1,0 +1,62 @@
+project:
+  type: website
+  output-dir: ../docs
+  resources: 
+    - "images"
+website:
+  search: 
+    location: sidebar
+    type: textbox
+  navbar:
+    search: false
+    background: primary
+    left: 
+      - text: "Landmark"
+        href: greedy_perm.qmd 
+    tools: 
+      - icon: github
+        href: https://github.com/peekxc/landmark-py
+  sidebar:
+    search: true
+    pinned: true
+    align: center 
+    border: true 
+    style: "floating"
+    contents:
+      - text: Overview
+        href: greedy_perm.qmd
+      - section: API Reference
+        href: index.qmd
+        contents: 
+          - name: landmarks 
+            href: landmarks.qmd
+
+# metadata-files:
+#   - _sidebar.yml
+# https://quarto.org/docs/output-formats/html-themes.html
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+    margin-left: 0em
+    linestretch: 1.2
+    css: styles.scss
+    page-layout: article
+    toc: true
+    
+
+quartodoc:
+  style: pkgdown
+  package: landmark
+  dir: .
+  source_dir: /Users/mpiekenbrock/landmark-py/src/landmark
+  title: API Reference
+  parser: google
+  # sidebar: _sidebar.yml
+  render_interlinks: False
+  sections:
+  - title: Landmark 
+    desc: Landmark package for finding metric-center approximations.
+    contents: 
+    - landmarks

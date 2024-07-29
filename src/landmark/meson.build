@@ -14,7 +14,6 @@ python_sources = [
   '__init__.py', 
   '__version__.py', 
   'datasets.py',
-  'predicates.py',
   'k_center.py'
 ]
 

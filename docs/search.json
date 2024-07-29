@@ -1,9 +1,134 @@
 [
   {
+    "objectID": "greedy_perm.html",
+    "href": "greedy_perm.html",
+    "title": "Landmark",
+    "section": "",
+    "text": "landmark is a Python package that constructs landmarks \\(L^\\ast \\subset X\\) from a point set \\(X \\subset \\mathbb{R}^d\\) or a metric space \\((X, d_X)\\) that approximate the metric k-center problem:\n\\[ L^\\ast \\triangleq \\mathop{\\mathrm{argmin}}\\limits_{\\substack{L \\subseteq X : \\lvert L \\rvert = k}} \\ \\max_{x \\in X} d_X(x, L)\\]\nBelow is an example a data set \\(X\\) (blue points), some sample landmarks \\(L\\) (red), along with the coverage (yellow) and packing (orange) properties they obey.",
+    "crumbs": [
+      "Landmark",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "greedy_perm.html#usage",
+    "href": "greedy_perm.html#usage",
+    "title": "Landmark",
+    "section": "Usage",
+    "text": "Usage\nGiven a point cloud \\(X \\in \\mathbb{R}^{n \\times d}\\) represented as a numpy matrix with \\(n\\) points in \\(d\\) dimensions, the indices of the landmarks can be found with the landmarks function:\n\nfrom landmark import landmarks\nind = landmarks(X, k = 10) ## Finds the indices of 25 landmarks\nprint(ind)\n\n[ 0 45 15 40  2  6 21 16 10 29]\n\n\nThe first \\(k\\)-indices of ind are equivalent to the \\(k\\)-th prefix of the greedy permutation. You can get their covering radii and their predecessors by specifying full_output=True:\n\nind, info = landmarks(X, k = 10, full_output = True)\nprint(ind)                  ## prefix indices\nprint(info['radii'])        ## insertion radii \nprint(info['predecessors']) ## predecessor map \n\n[ 0 45 15 40  2  6 21 16 10 29]\n[ inf 0.88 0.67 0.54 0.46 0.44 0.37 0.29 0.27 0.25]\n[ 0  0 45 45  0 45 40  6 45 15]",
+    "crumbs": [
+      "Landmark",
+      "Overview"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "my package",
+    "title": "API Reference",
     "section": "",
-    "text": "my package"
+    "text": "landmarks\nComputes landmark indices for a point set or metric space via the furthest first traversal.",
+    "crumbs": [
+      "Landmark",
+      "API Reference"
+    ]
+  },
+  {
+    "objectID": "index.html#landmark",
+    "href": "index.html#landmark",
+    "title": "API Reference",
+    "section": "",
+    "text": "landmarks\nComputes landmark indices for a point set or metric space via the furthest first traversal.",
+    "crumbs": [
+      "Landmark",
+      "API Reference"
+    ]
+  },
+  {
+    "objectID": "landmarks.html",
+    "href": "landmarks.html",
+    "title": "landmarks",
+    "section": "",
+    "text": "landmarks(X, k=15, eps=-1.0, seed=0, full_output=False, metric='euclidean', **kwargs)\nComputes landmark indices for a point set or metric space via the furthest first traversal.\nThis function computes a prefix of the greedy permutation of X using the furthest first traversal, which is known to yield a 2-approximation for the metric k-center problem.\nSetting k constructs a fixed sized prefix, while setting eps &gt; 0 dynamically expands the prefix until a cover over X of balls with radius eps is found. If full_output = True, a dictionary containing the insertion radii and predecessors associated with each point in the prefix is returned.\nFor more details on the greedy permutation and the metric k-center problem, see [1] and [2].\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nX\nArrayLike\n(n x d) matrix of n points in d dimensions, a distance matrix, or a set of pairwise distances\nrequired\n\n\nk\nOptional[int]\nnumber of landmarks requested. Defaults to 15.\n15\n\n\neps\nOptional[float]\ncovering radius to stop finding landmarks at. If negative, uses k instead (default).\n-1.0\n\n\nseed\nint\nindex of the initial point to be the first landmark. Defaults to 0.\n0\n\n\nfull_output\nbool\nwhether to return insertion radii and predecessors. Defaults to False.\nFalse\n\n\nmetric\nstr\nmetric distance to use. Ignored if X is a set of distances. See details.\n'euclidean'\n\n\n**kwargs\ndict\nIf metric = 'minkowski', supply p for the Minkowski p-norm.\n{}\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nnp.ndarray\nIndices of the landmark points; if full_output = True, also returns a dictionary containing auxiliary information.\n\n\n\n\n\n\n\nBy default np.inf is used as the first covering radius, as the diameter can be difficult to compute.\nIf the metric is a Minkowksi metric, the landmarks may be computed from the point set directly. For all other metrics, you must supply all pairwise distances as the X argument.\nIf both k and eps are specified, both are used as stopping criteria (whichever becomes true first).\n\n\n\n\n\nEppstein, David, Sariel Har-Peled, and Anastasios Sidiropoulos. “Approximate greedy clustering and distance selection for graph metrics.” arXiv preprint arXiv:1507.01555 (2015).\nAgarwal, Pankaj K., and Cecilia Magdalena Procopiuc. “Exact and approximation algorithms for clustering.” Algorithmica 33 (2002): 201-226.",
+    "crumbs": [
+      "Landmark",
+      "API Reference",
+      "landmarks"
+    ]
+  },
+  {
+    "objectID": "landmarks.html#parameters",
+    "href": "landmarks.html#parameters",
+    "title": "landmarks",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nX\nArrayLike\n(n x d) matrix of n points in d dimensions, a distance matrix, or a set of pairwise distances\nrequired\n\n\nk\nOptional[int]\nnumber of landmarks requested. Defaults to 15.\n15\n\n\neps\nOptional[float]\ncovering radius to stop finding landmarks at. If negative, uses k instead (default).\n-1.0\n\n\nseed\nint\nindex of the initial point to be the first landmark. Defaults to 0.\n0\n\n\nfull_output\nbool\nwhether to return insertion radii and predecessors. Defaults to False.\nFalse\n\n\nmetric\nstr\nmetric distance to use. Ignored if X is a set of distances. See details.\n'euclidean'\n\n\n**kwargs\ndict\nIf metric = 'minkowski', supply p for the Minkowski p-norm.\n{}",
+    "crumbs": [
+      "Landmark",
+      "API Reference",
+      "landmarks"
+    ]
+  },
+  {
+    "objectID": "landmarks.html#returns",
+    "href": "landmarks.html#returns",
+    "title": "landmarks",
+    "section": "",
+    "text": "Type\nDescription\n\n\n\n\nnp.ndarray\nIndices of the landmark points; if full_output = True, also returns a dictionary containing auxiliary information.",
+    "crumbs": [
+      "Landmark",
+      "API Reference",
+      "landmarks"
+    ]
+  },
+  {
+    "objectID": "landmarks.html#notes",
+    "href": "landmarks.html#notes",
+    "title": "landmarks",
+    "section": "",
+    "text": "By default np.inf is used as the first covering radius, as the diameter can be difficult to compute.\nIf the metric is a Minkowksi metric, the landmarks may be computed from the point set directly. For all other metrics, you must supply all pairwise distances as the X argument.\nIf both k and eps are specified, both are used as stopping criteria (whichever becomes true first).",
+    "crumbs": [
+      "Landmark",
+      "API Reference",
+      "landmarks"
+    ]
+  },
+  {
+    "objectID": "landmarks.html#references",
+    "href": "landmarks.html#references",
+    "title": "landmarks",
+    "section": "",
+    "text": "Eppstein, David, Sariel Har-Peled, and Anastasios Sidiropoulos. “Approximate greedy clustering and distance selection for graph metrics.” arXiv preprint arXiv:1507.01555 (2015).\nAgarwal, Pankaj K., and Cecilia Magdalena Procopiuc. “Exact and approximation algorithms for clustering.” Algorithmica 33 (2002): 201-226.",
+    "crumbs": [
+      "Landmark",
+      "API Reference",
+      "landmarks"
+    ]
+  },
+  {
+    "objectID": "k_center.landmarks.html",
+    "href": "k_center.landmarks.html",
+    "title": "k_center.landmarks",
+    "section": "",
+    "text": "k_center.landmarks(X, k=15, eps=-1.0, seed=0, full_output=False, metric='euclidean')\nComputes landmarks points for a point set or set of distance using the ‘maxmin’ method.\nThis function computes a prefix of the greedy permutation of X using the ‘maxmin’ method; if k is set, only the first k points are found, otherwise if eps is positive the prefix is expanded until a cover over X of balls with radius eps is found.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nX\nArrayLike\n(n x d) matrix of n points in d dimensions, a distance matrix, or a set of pairwise distances\nrequired\n\n\nk\nOptional[int]\nnumber of landmarks requested. Defaults to 15.\n15\n\n\neps\nOptional[float]\ncovering radius to stop finding landmarks at. If negative, uses k instead (default).\n-1.0\n\n\nseed\nint\nindex of the initial point to be the first landmark. Defaults to 0.\n0\n\n\nfull_output\nbool\nwhether to return insertion radii and predecessors. Defaults to False.\nFalse\n\n\nmetric\nstr\nmetric distance to use. Ignored if X is a set of distances. See details.\n'euclidean'\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nnp.ndarray\nIndices of the landmark points; if full_output = True, also returns a dictionary containing auxiliary information.\n\n\n\n\n\n\n\nThe first radius is always the diameter of the point set, which can be expensive to compute for high dimensions, so by default “inf” is used as the first covering radius\nIf metric = \"euclidean\" and X is a set of coordinates, the landmarks may be computed from the point set directly. For all other metrics, you must compute all pairwise distances first and supply that as X.\nIf ‘k’ is specified an ‘eps’ is not (or it’s -1.0), then the procedure stops when ‘k’ landmarks are found. The converse is true if k = 0 and eps &gt; 0. If both are specified, the both are used as stopping criteria for the procedure (whichever becomes true first).\ndictionary containing the insertion radii whose values ‘r’ yield a cover of ‘a’ when balls of radius ‘r’ are places at the landmark points and the predecessors."
+  },
+  {
+    "objectID": "k_center.landmarks.html#parameters",
+    "href": "k_center.landmarks.html#parameters",
+    "title": "k_center.landmarks",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nX\nArrayLike\n(n x d) matrix of n points in d dimensions, a distance matrix, or a set of pairwise distances\nrequired\n\n\nk\nOptional[int]\nnumber of landmarks requested. Defaults to 15.\n15\n\n\neps\nOptional[float]\ncovering radius to stop finding landmarks at. If negative, uses k instead (default).\n-1.0\n\n\nseed\nint\nindex of the initial point to be the first landmark. Defaults to 0.\n0\n\n\nfull_output\nbool\nwhether to return insertion radii and predecessors. Defaults to False.\nFalse\n\n\nmetric\nstr\nmetric distance to use. Ignored if X is a set of distances. See details.\n'euclidean'"
+  },
+  {
+    "objectID": "k_center.landmarks.html#returns",
+    "href": "k_center.landmarks.html#returns",
+    "title": "k_center.landmarks",
+    "section": "",
+    "text": "Type\nDescription\n\n\n\n\nnp.ndarray\nIndices of the landmark points; if full_output = True, also returns a dictionary containing auxiliary information."
+  },
+  {
+    "objectID": "k_center.landmarks.html#notes",
+    "href": "k_center.landmarks.html#notes",
+    "title": "k_center.landmarks",
+    "section": "",
+    "text": "The first radius is always the diameter of the point set, which can be expensive to compute for high dimensions, so by default “inf” is used as the first covering radius\nIf metric = \"euclidean\" and X is a set of coordinates, the landmarks may be computed from the point set directly. For all other metrics, you must compute all pairwise distances first and supply that as X.\nIf ‘k’ is specified an ‘eps’ is not (or it’s -1.0), then the procedure stops when ‘k’ landmarks are found. The converse is true if k = 0 and eps &gt; 0. If both are specified, the both are used as stopping criteria for the procedure (whichever becomes true first).\ndictionary containing the insertion radii whose values ‘r’ yield a cover of ‘a’ when balls of radius ‘r’ are places at the landmark points and the predecessors."
   }
 ]

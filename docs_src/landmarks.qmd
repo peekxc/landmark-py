@@ -1,0 +1,41 @@
+# landmarks { #landmark.landmarks }
+
+`landmarks(X, k=15, eps=-1.0, seed=0, full_output=False, metric='euclidean', **kwargs)`
+
+Computes *landmark* indices for a point set or metric space via the furthest first traversal.
+
+This function computes a prefix of the *greedy permutation* of `X` using the *furthest first traversal*, 
+which is known to yield a 2-approximation for the *metric k-center* problem. 
+
+Setting `k` constructs a fixed sized prefix, while setting `eps > 0` dynamically expands the prefix     until a cover over `X` of balls with radius `eps` is found. If `full_output = True`, a dictionary containing the        insertion radii and predecessors associated with each point in the prefix is returned. 
+
+For more details on the greedy permutation and the metric k-center problem, see [1] and [2].
+
+## Parameters
+
+| Name          | Type              | Description                                                                                       | Default       |
+|---------------|-------------------|---------------------------------------------------------------------------------------------------|---------------|
+| `X`           | ArrayLike         | (n x d) matrix of *n* points in *d* dimensions, a distance matrix, or a set of pairwise distances | _required_    |
+| `k`           | Optional\[int\]   | number of landmarks requested. Defaults to 15.                                                    | `15`          |
+| `eps`         | Optional\[float\] | covering radius to stop finding landmarks at. If negative, uses *k* instead (default).            | `-1.0`        |
+| `seed`        | int               | index of the initial point to be the first landmark. Defaults to 0.                               | `0`           |
+| `full_output` | bool              | whether to return insertion radii and predecessors. Defaults to False.                            | `False`       |
+| `metric`      | str               | metric distance to use. Ignored if `X` is a set of distances. See details.                        | `'euclidean'` |
+| `**kwargs`    | dict              | If `metric = 'minkowski'`, supply `p` for the Minkowski p-norm.                                   | `{}`          |
+
+## Returns
+
+| Type       | Description                                                                                                          |
+|------------|----------------------------------------------------------------------------------------------------------------------|
+| np.ndarray | Indices of the landmark points; if `full_output = True`, also returns a dictionary containing auxiliary information. |
+
+## Notes
+
+- By default `np.inf` is used as the first covering radius, as the diameter can be difficult to compute.
+- If the metric is a Minkowksi metric, the landmarks may be computed from the point set directly. For all                       other metrics, you must supply all pairwise distances as the `X` argument. 
+- If both `k` and `eps` are specified, both are used as stopping criteria (whichever becomes true first).
+
+## References
+
+1. Eppstein, David, Sariel Har-Peled, and Anastasios Sidiropoulos. "Approximate greedy clustering and distance selection for graph metrics." arXiv preprint arXiv:1507.01555 (2015).
+2. Agarwal, Pankaj K., and Cecilia Magdalena Procopiuc. "Exact and approximation algorithms for clustering." Algorithmica 33 (2002): 201-226.
