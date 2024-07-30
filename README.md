@@ -1,8 +1,9 @@
 # Landmark 
 
-`landmark` is a Python package that constructs _landmarks_ $L^\ast \subset X$ from a point set $X \subset \mathbb{R}^d$ or a metric space $(X, d_X)$ that approximate the [metric k-center problem](https://en.wikipedia.org/wiki/Metric_k-center): 
+`landmark` is a Python package that constructs _landmarks_ $L_k = \{x_1, x_2, \dots, x_k \}$ from a point set $X \subset \mathbb{R}^d$ or metric space $(X, d_X)$.
+<!-- `landmark` is a Python package that constructs _landmarks_ $L^\ast \subset X$ from a point set $X \subset \mathbb{R}^d$ or a metric space $(X, d_X)$ that approximate the [metric k-center problem](https://en.wikipedia.org/wiki/Metric_k-center): 
 
-$$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : \lvert L \rvert = k}} \ \max_{x \in X} d_X(x, L)$$
+$$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : \lvert L \rvert = k}} \ \max_{x \in X} d_X(x, L)$$ -->
 
 Below is an example a data set $X$ (blue points), some sample landmarks $L$ (red), along with the coverage (yellow) and packing (orange) properties they obey. 
 
@@ -10,7 +11,13 @@ Below is an example a data set $X$ (blue points), some sample landmarks $L$ (red
 
 ## Installation 
 
-> python -m pip install scikit-landmark
+The package can be installed with [pip](https://packaging.python.org/en/latest/guides/tool-recommendations/#installing-packages): 
+
+```{bash}
+python -m pip install scikit-landmark
+```
+
+Alternatively, both the source distribution and wheels are available on [PyPI](https://pypi.org/project/scikit-landmark/)  for distributing and offline use.
 
 ## Usage 
 
