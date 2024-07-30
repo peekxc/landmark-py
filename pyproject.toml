@@ -26,7 +26,7 @@ include = [
 ]
 
 [project.optional-dependencies]
-test = ["scipy"]
+test = ["scipy", "pytest", "coveralls", "coverage", "pytest-cov"]
 
 [tool.meson-python.args]
 setup = ['--default-library=static']
