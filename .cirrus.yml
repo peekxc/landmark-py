@@ -1,0 +1,20 @@
+container:
+  image: python:3.11
+
+env:
+  PYTHONWARNINGS: "ignore"
+  
+task:
+  name: test_python_package
+
+  pip_cache:
+    folder: ~/.cache/pip
+    fingerprint_script: echo $PYTHON_VERSION
+    populate_script: python3 -m pip install --upgrade meson-python wheel
+
+  install_script:
+    - python -m pip install . -vvv
+
+  test_script:
+    - python -m pip install '.[test]'
+    - python -m pytest tests/
