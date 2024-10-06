@@ -1,5 +1,5 @@
 container:
-  image: python:slim
+  image: python:3.11
 
 task:
   name: test_python_package
