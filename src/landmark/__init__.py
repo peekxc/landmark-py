@@ -1,4 +1,5 @@
 """Landmark package for finding metric-center approximations."""
+
 import importlib.metadata
 from .k_center import landmarks  # noqa: F401
 

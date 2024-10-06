@@ -1,7 +1,9 @@
-import numpy as np 
+# %%
+import numpy as np
 import laspy as lp
-import open3d as o3 
+import open3d as o3
 
+# %%
 ## needs lazrs
 laz_file = "/Users/mpiekenbrock/Downloads/ma2021_cent_east_Job1006340/ma2021_cent_east_Job1006340.laz"
 pc = lp.read(laz_file)
@@ -93,7 +95,7 @@ vis.run()
 # np.savez_compressed("/Users/mpiekenbrock/landmark-py/notebooks/xyz.npz", xyz)
 # np.savez_compressed("/Users/mpiekenbrosck/landmark-py/notebooks/xyz_reduced.npz", xyz_reduced)
 
-## Unreduced: 3,844,860 points 
-## Reduced: 405,028 points 
-## About a 90% reduction! 
+## Unreduced: 3,844,860 points
+## Reduced: 405,028 points
+## About a 90% reduction!
 # 405028/3844860

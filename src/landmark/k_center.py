@@ -6,7 +6,9 @@ from typing import Optional
 import numpy as np
 from numpy.typing import ArrayLike
 
-import _maxmin  # isort:skip
+# import _maxmin  # isort:skip
+from . import maxmin
+
 
 def _invert_comb2(N: int):
 	"""Find n such that choose(n, 2) == N."""
@@ -29,7 +31,8 @@ def is_point_cloud(x: np.ndarray) -> bool:
 	return isinstance(x, np.ndarray) and x.ndim == 2
 
 
-P_MAP = {"euclidean": 2, "manhattan": 1, "cityblock": 1, "chebychev": np.inf, "minkowski": 2}
+P_MAP = {"euclidean": 2, "manhattan": 1, "cityblock": 1, "minkowski": 2}
+# "chebychev": np.inf
 
 
 def landmarks(
@@ -81,28 +84,48 @@ def landmarks(
 	if X.ndim == 1 or (is_dist_m := is_distance_matrix(X)):
 		n = X.shape[0] if is_dist_m else _invert_comb2(len(X))
 		X = X[np.triu_indices(X.shape[0], k=1)] if is_dist_m else X
-		indices, ins_radii, pred_map = _maxmin.maxmin(X, eps, k, n, True, seed, 2)
+		# indices, ins_radii, pred_map = _maxmin.maxmin(X, eps, k, n, True, seed, 2)
+		indices, ins_radii, pred_map = maxmin.furthest_first_traversal_pdist(X, n, k, eps, seed)
+		ins_radii = np.asarray(ins_radii)
 	elif is_point_cloud(X):
 		if isinstance(metric, str):
-			assert metric.lower() in P_MAP, f"Unknown metric '{metric}'; must be one of {str(list(P_MAP.keys()))}"
+			assert metric.lower() in P_MAP, f"Unknown metric '{metric}'; must be one of {list(P_MAP.keys())}"
 			p = kwargs.pop("p", P_MAP[metric.lower()])
-			p = -1 if np.isinf(p) else np.abs(float(p))
+			# p = -1 if np.isinf(p) else np.abs(float(p))
 		else:
 			raise ValueError(f"Invalid input metric '{metric}'; Must be a known minkowski metric.")
 		n = X.shape[0]
-		indices, ins_radii, pred_map = _maxmin.maxmin(X, eps, k, n, False, seed, p)
-		ins_radii = np.sqrt(ins_radii)
+		# indices, ins_radii, pred_map = _maxmin.maxmin(X, eps, k, n, False, seed, p)
+		indices, ins_radii, pred_map = maxmin.furthest_first_traversal_pc(X, k, eps, seed, float(p))
+		ins_radii = np.sqrt(np.asarray(ins_radii))
 	else:
 		raise ValueError(
 			"Unknown input type detected. Must be a matrix of points, a distance matrix, or a set of pairwise distances."
 		)
 
 	## Check packing/coverage properties is satisfied
-	is_monotone = np.all(np.diff(-np.array(ins_radii)) >= 0.0)
+	is_monotone = np.all(np.diff(-ins_radii) >= 0.0)
 	assert is_monotone, "Invalid metric: non-monotonically decreasing radii found."
 
 	## Switch the input
 	if full_output:
-		return (indices, {"radii": ins_radii, "predecessors": pred_map})
+		return (np.asarray(indices), {"radii": ins_radii, "predecessors": np.asarray(pred_map)})
 	else:
-		return indices
+		return np.asarray(indices)
+
+
+# def furthest_first_traversal(
+# 	X: np.ndarray,
+# 	k: Optional[int] = 15,
+# 	eps: Optional[float] = -1.0,
+# 	seed: int = 0,
+# 	full_output: bool = False,
+# 	metric: str = "euclidean",
+# ):
+# 	from scipy.spatial.distance import cdist
+
+# 	S = cdist(X[seed], X, metric=metric)
+# 	indices, ins_radii, pred_map = [], [], []
+# 	j = 0
+# 	for i, x in enumerate(X):
+# 		D = np.minimum(S[j], D)

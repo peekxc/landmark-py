@@ -4,7 +4,7 @@ requires = ['meson-python', 'wheel', 'ninja', 'numpy', 'pybind11']
 
 [project]
 name = "scikit-landmark"
-version = '0.0.5'
+version = '0.1.0'
 readme = "README.md"
 classifiers = [
 	"Intended Audience :: Science/Research",
@@ -20,10 +20,10 @@ dependencies = [
   "numpy"
 ]
 license = {file = "LICENSE"}
-include = [
-	{ path = "landmark/**/*.so", format = "wheel" },
-	{ path = "landmark/**/*.pyd", format = "wheel" },
-]
+# include = [
+# 	{ path = "landmark/**/*.so", format = "wheel" },
+# 	{ path = "landmark/**/*.pyd", format = "wheel" },
+# ]
 
 [project.optional-dependencies]
 test = ["scipy", "pytest", "coveralls", "coverage", "pytest-cov"]

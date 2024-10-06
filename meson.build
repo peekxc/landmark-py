@@ -26,9 +26,9 @@ if py.language_version().version_compare('< 3.8')
 endif
 
 ## Print the C++ compiler + tack on default arguments
-compiler = meson.get_compiler('cpp')
-message('Compiler = '+compiler.get_id()+', version: '+compiler.version())
-_cpp_args = compiler.get_supported_arguments(
+cpp = meson.get_compiler('cpp')
+message('Compiler = '+cpp.get_id()+', version: '+cpp.version())
+_cpp_args = cpp.get_supported_arguments(
   '-Wno-unused-but-set-variable',
   '-Wno-unused-function',
   '-Wno-conversion',
@@ -51,6 +51,22 @@ if fs.is_dir('extern')
   includes += include_directories('extern')
 endif
 
+
+pythran = find_program('pythran', native: true, version: '>=0.14.0')
+_cpp_args += [
+	'-DENABLE_PYTHON_MODULE',
+	'-D__PYTHRAN__=3',
+	# '-DPYTHRAN_BLAS_NONE'
+]
+_cpp_args += cpp.get_supported_arguments(
+  '-Wno-unused-but-set-variable',
+  '-Wno-unused-function',
+  '-Wno-conversion',
+  '-Wno-misleading-indentation',
+  '-Wno-unused-lambda-capture',
+  '-Wno-unused-parameter', 
+	'-Wno-deprecated-declarations'
+)
 
 ## Compile the package directory
 subdir('src' / pkg_name)
