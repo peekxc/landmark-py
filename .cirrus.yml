@@ -7,7 +7,7 @@ task:
   pip_cache:
     folder: ~/.cache/pip
     fingerprint_script: echo $PYTHON_VERSION
-    populate_script: python -m pip install .
+    populate_script: python3 -m pip install --upgrade meson-python wheel
 
   install_script:
     - python -m pip install .
