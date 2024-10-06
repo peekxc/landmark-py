@@ -1,6 +1,9 @@
 container:
   image: python:3.11
 
+env:
+  PYTHONWARNINGS: "ignore"
+  
 task:
   name: test_python_package
 

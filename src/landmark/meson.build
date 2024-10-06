@@ -36,8 +36,8 @@ pythran_modules = ['maxmin']
 #   env: pythran_env,
 #   depend_files: [pythranrc],
 # )
-pythran_cppflags = run_command(py.path(), '-m', 'pythran.config', '--cflags', check:true, env:pythran_env).stdout().strip().split()
-pythran_ldflags = run_command(py.path(), '-m', 'pythran.config', '--libs', check:true, env:pythran_env).stdout().strip().split()
+pythran_cppflags = run_command(py.full_path(), '-m', 'pythran.config', '--cflags', check:true, env:pythran_env).stdout().strip().split()
+pythran_ldflags = run_command(py.full_path(), '-m', 'pythran.config', '--libs', check:true, env:pythran_env).stdout().strip().split()
 
 foreach pythran_ext : pythran_modules
 	message('Processing pythran module: ' + pythran_ext)

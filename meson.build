@@ -37,7 +37,7 @@ _cpp_args = cpp.get_supported_arguments(
   '-fvisibility=hidden',
   '-Wno-deprecated-anon-enum-enum-conversion', 
 	'-Wno-deprecated-copy-with-user-provided-copy',
-	'-Wunused-local-typedef'
+	'-Wno-unused-local-typedef'
 )
 
 ## Include directories

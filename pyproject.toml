@@ -51,3 +51,7 @@ indent-style = "tab"
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+## This is actually for pythran builds on CI
+[tool.setuptools.packages]
+find = { where = ["src"] }
