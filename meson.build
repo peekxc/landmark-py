@@ -40,11 +40,11 @@ _cpp_args = cpp.get_supported_arguments(
 
 ## Include directories
 incdir_numpy = run_command(py, ['-c', 'import os; os.chdir(".."); import numpy; print(numpy.get_include())'], check : true).stdout().strip()
-incdir_pybind11 = run_command(py, ['-c', 'import os; os.chdir(".."); import pybind11; print(pybind11.get_include())'], check : true).stdout().strip()
+# incdir_pybind11 = run_command(py, ['-c', 'import os; os.chdir(".."); import pybind11; print(pybind11.get_include())'], check : true).stdout().strip()
 
 ## Header includes
 includes += include_directories(incdir_numpy)
-includes += include_directories(incdir_pybind11)
+# includes += include_directories(incdir_pybind11)
 
 fs = import('fs')
 if fs.is_dir('extern')
