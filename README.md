@@ -8,7 +8,7 @@ The resulting sequence, also called the _greedy permutation_, satisfy a number o
 
 ![Landmarks example](docs/images/k_center.svg)
 
-The landmarks themselves $L_k$ can be used to approximate solutions to hard problems, including the [traveling saleman problem](https://ieeexplore.ieee.org/document/9001738), the [metric k-center clustering problem](https://en.wikipedia.org/wiki/Metric_k-center), [geometric filtration sparsification problem](https://donsheehy.net/research/cavanna15geometric.pdf), and various [proximity searching problems](https://donsheehy.net/research/chubet23proximity.pdf).
+The landmarks themselves $L_k$ can be used to approximate solutions to hard problems, including the [traveling saleman problem](https://ieeexplore.ieee.org/document/9001738), the [metric k-center clustering problem](https://en.wikipedia.org/wiki/Metric_k-center), the [geometric filtration sparsification problem](https://donsheehy.net/research/cavanna15geometric.pdf), and various [proximity searching problems](https://donsheehy.net/research/chubet23proximity.pdf).
 
 ## Installation 
 
