@@ -1,14 +1,14 @@
 # Landmark 
 
-`landmark` is a Python package that constructs _landmarks_ $L_k = \{x_1, x_2, \dots, x_k \}$ from a point set $X \subset \mathbb{R}^d$ or metric space $(X, d_X)$ via [furthest-first traversal](https://en.wikipedia.org/wiki/Farthest-first_traversal):
+`landmark` is a Python package that constructs a sequence of _landmarks_ $L_k = (\{x_1, x_2, \dots, x_k \})$ from a point set $X \subset \mathbb{R}^d$ or metric space $(X, d_X)$ via [furthest-first traversal](https://en.wikipedia.org/wiki/Farthest-first_traversal):
 
-$$ L^\ast \triangleq \mathop{\mathrm{argmin}}\limits_{\substack{L \subseteq X : \lvert L \rvert = k}} \ \max_{x \in X} d_X(x, L)$$ -->
+$$ x_i = \mathop{\mathrm{arg min}}\limits_{x \in X} \mathop{} d_X(x, L_{i − 1}) $$
 
 The resulting landmarks satisfy a number of convenient coverage and packing properties. Below is an example a data set $X$ (blue points), some sample landmarks $L$ (red), along with the coverage (yellow) and packing (orange) properties they obey. 
 
 ![Landmarks example](docs/images/k_center.svg)
 
-The resulting landmarks forms a sequence called the _greedy permutation_, which can be used to approximate a number of classical problems, including the [traveling saleman problem](https://ieeexplore.ieee.org/document/9001738), the [metric k-center clustering problem](https://en.wikipedia.org/wiki/Metric_k-center), and [nearest neighbor searching problem](https://www.cs.tufts.edu/research/geometry/FWCG24/papers/FWCG_24_paper_3.pdf).
+The sequence formed by resulting landmarks, also called the _greedy permutation_, can be used to approximate a number of classical problems, such as the [traveling saleman problem](https://ieeexplore.ieee.org/document/9001738), the [metric k-center clustering problem](https://en.wikipedia.org/wiki/Metric_k-center), and various [proximity / range searching problems](https://donsheehy.net/research/chubet23proximity.pdf).
 
 ## Installation 
 
@@ -36,3 +36,5 @@ print(ind)                  ## prefix indices
 print(info['radii'])        ## insertion radii 
 print(info['predecessors']) ## predecessor map 
 ```
+
+For other usages, see the [documentation](https://peekxc.github.io/landmark-py/greedy_perm.html). 
