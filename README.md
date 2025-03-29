@@ -2,13 +2,13 @@
 
 `landmark` is a Python package that constructs a sequence of _landmarks_ $L_k = (\{x_1, x_2, \dots, x_k \})$ from a point set $X \subset \mathbb{R}^d$ or metric space $(X, d_X)$ via [furthest-first traversal](https://en.wikipedia.org/wiki/Farthest-first_traversal):
 
-$$ x_i = \mathop{\mathrm{arg min}}\limits_{x \in X} \mathop{} d_X(x, L_{i − 1}) $$
+$$ x_i = \mathop{\mathrm{arg max}}\limits_{x \in X} \mathop{} d_X(x, L_{i − 1}) $$
 
-The resulting landmarks satisfy a number of convenient coverage and packing properties. Below is an example a data set $X$ (blue points), some sample landmarks $L$ (red), along with the coverage (yellow) and packing (orange) properties they obey. 
+The resulting sequence, also called the _greedy permutation_, satisfy a number of coverage and packing properties. Below is an example a data set $X$ (blue points), some sample landmarks $L$ (red), along with the coverage (yellow) and packing (orange) properties they obey. 
 
 ![Landmarks example](docs/images/k_center.svg)
 
-The sequence formed by resulting landmarks, also called the _greedy permutation_, can be used to approximate a number of classical problems, such as the [traveling saleman problem](https://ieeexplore.ieee.org/document/9001738), the [metric k-center clustering problem](https://en.wikipedia.org/wiki/Metric_k-center), and various [proximity / range searching problems](https://donsheehy.net/research/chubet23proximity.pdf).
+The landmarks themselves $L_k$ can be used to approximate solutions to hard problems, including the [traveling saleman problem](https://ieeexplore.ieee.org/document/9001738), the [metric k-center clustering problem](https://en.wikipedia.org/wiki/Metric_k-center), [geometric filtration sparsification problem](https://donsheehy.net/research/cavanna15geometric.pdf), and various [proximity searching problems](https://donsheehy.net/research/chubet23proximity.pdf).
 
 ## Installation 
 
