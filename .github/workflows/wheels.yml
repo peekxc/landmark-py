@@ -63,7 +63,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-cov coverage
           CIBW_TEST_COMMAND: coverage run --source={package} -m pytest {package}/tests && coverage report -m
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           # name: wheels
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
@@ -109,7 +109,7 @@ jobs:
           CIBW_TEST_COMMAND: coverage run --source={package} -m pytest {package}/tests && coverage report -m
 
       # - uses: actions/upload-artifact@v3
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           # name: wheels
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
@@ -153,7 +153,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest pytest-cov coverage
           CIBW_TEST_COMMAND: coverage run --source={package} -m pytest {package}/tests && coverage report -m
           
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           # name: wheels
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
@@ -178,7 +178,7 @@ jobs:
       run: pipx run build --sdist
 
     # - uses: actions/upload-artifact@v3
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v6
       with:
         name: cibw-sdist
         path: dist/*.tar.gz
